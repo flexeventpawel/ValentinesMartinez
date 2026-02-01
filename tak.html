@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>💘 Wiedziałem! 💘</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #ffb6c1, #ffe4e1);
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+h1 {
+    margin-top: 50px;
+    font-family: 'Pacifico', cursive;
+    font-size: 42px;
+    color: #c2185b;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+img {
+    margin-top: 30px;
+    max-width: 80%;
+    border-radius: 30px;
+    box-shadow: 0 0 30px rgba(255,0,120,0.6);
+}
+
+/* CONFETTI */
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    animation: confettiFall 5s linear forwards;
+}
+
+@keyframes confettiFall {
+    0% { transform: translateY(-10vh) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(720deg); }
+}
+</style>
+</head>
+
+<body>
+
+<h1>Wiedziałem że się zgodzisz! ❤️<br>Kocham Cię &lt;3</h1>
+
+<img src="foto2.jpg" alt="Nasze zdjęcie">
+
+<script>
+// CONFETTI NON STOP
+setInterval(() => {
+    const conf = document.createElement("div");
+    conf.className = "confetti";
+    conf.style.left = Math.random() * 100 + "vw";
+    conf.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+    document.body.appendChild(conf);
+
+    setTimeout(() => conf.remove(), 5000);
+}, 150);
+</script>
+
+</body>
+</html>
