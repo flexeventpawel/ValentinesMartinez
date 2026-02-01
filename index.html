@@ -161,12 +161,12 @@ const noBtn = document.getElementById("no");
 const counter = document.getElementById("counter");
 let tries = 0;
 
-const texts = ["NIE 💔", "na pewno? 😳", "ej no 😭", "nie bądź taka 😘", "plss 🥺"];
+const texts = ["NIE ?", "SPRÓBUJ JESZCZE RAZ", "WE NO ", "nie bądź taka 😘", "okienko 'TAK' nie ucieka :) "];
 
 noBtn.addEventListener("mouseover", () => {
     tries++;
     counter.style.display = "block";
-    counter.innerHTML = `Próby ucieczki przed miłością: ${tries} 💘😈`;
+    counter.innerHTML = `Licznik Prób Odmówienia: ${tries} 💔😈`;
 
     const x = Math.random() * (window.innerWidth - 120);
     const y = Math.random() * (window.innerHeight - 60);
