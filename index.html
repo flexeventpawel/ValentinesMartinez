@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>💖 Walentynka 💖</title>
+
+<!-- CZCIONKI -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffb6c1, #ffe4e1);
+    overflow: hidden;
+    text-align: center;
+}
+
+/* TEKST */
+#text {
+    margin-top: 40px;
+    font-family: 'Pacifico', cursive;
+    font-size: 38px;
+    color: #c2185b;
+    min-height: 120px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+    100% { transform: scale(1); }
+}
+
+/* LICZNIK */
+#counter {
+    display: none;
+    margin-top: 10px;
+    font-size: 26px;
+    font-weight: 600;
+    color: #880e4f;
+    animation: pulse 1.5s infinite;
+}
+
+/* ZDJĘCIE */
+#photo {
+    display: none;
+    margin-top: 20px;
+}
+
+#photo img {
+    max-width: 80%;
+    border-radius: 30px;
+    box-shadow: 0 0 25px rgba(255,0,120,0.6);
+}
+
+/* PRZYCISKI */
+.buttons {
+    display: none;
+    margin-top: 30px;
+}
+
+button {
+    padding: 18px 40px;
+    font-size: 22px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+#yes {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#no {
+    background-color: #f44336;
+    color: white;
+    position: absolute;
+}
+
+/* SERDUSZKA */
+.heart {
+    position: absolute;
+    font-size: 22px;
+    animation: fall 10s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-10vh); }
+    100% { transform: translateY(110vh); }
+}
+
+/* CONFETTI */
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    animation: confettiFall 6s linear forwards;
+    opacity: 0.9;
+}
+
+@keyframes confettiFall {
+    0% { transform: translateY(-10vh) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(720deg); }
+}
+
+/* BUZIAKI */
+.kiss {
+    position: absolute;
+    font-size: 30px;
+    animation: float 4s ease-out forwards;
+}
+
+@keyframes float {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(2) translateY(-200px); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="text"></div>
+<div id="counter"></div>
+
+<div id="photo">
+    <img src="foto1.jpg">
+</div>
+
+<div class="buttons">
+    <button id="yes">TAK 💘</button>
+    <button id="no">NIE 💔</button>
+</div>
+
+<script>
+// ===== TEKST =====
+const words = "Droga Martynko ! Czy zostaniesz Moją Walentynką?".split(" ");
+let index = 0;
+const textDiv = document.getElementById("text");
+
+const interval = setInterval(() => {
+    textDiv.innerHTML += words[index] + " ";
+    index++;
+    if (index === words.length) {
+        clearInterval(interval);
+        setTimeout(() => {
+            document.getElementById("photo").style.display = "block";
+            document.querySelector(".buttons").style.display = "block";
+        }, 800);
+    }
+}, 400);
+
+// ===== LICZNIK + NIE =====
+const noBtn = document.getElementById("no");
+const counter = document.getElementById("counter");
+let tries = 0;
+
+const texts = ["NIE 💔", "na pewno? 😳", "ej no 😭", "nie bądź taka 😘", "plss 🥺"];
+
+noBtn.addEventListener("mouseover", () => {
+    tries++;
+    counter.style.display = "block";
+    counter.innerHTML = `Próby ucieczki przed miłością: ${tries} 💘😈`;
+
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 60);
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+    noBtn.style.transform = `rotate(${Math.random() * 40 - 20}deg) scale(${Math.random() * 0.6 + 0.4})`;
+    noBtn.innerText = texts[Math.floor(Math.random() * texts.length)];
+});
+
+// ===== CIĄGŁE CONFETTI =====
+setInterval(() => {
+    const conf = document.createElement("div");
+    conf.className = "confetti";
+    conf.style.left = Math.random() * 100 + "vw";
+    conf.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+    document.body.appendChild(conf);
+    setTimeout(() => conf.remove(), 6000);
+}, 200);
+
+// ===== WYBUCH CONFETTI =====
+function launchConfetti() {
+    for (let i = 0; i < 120; i++) {
+        const conf = document.createElement("div");
+        conf.className = "confetti";
+        conf.style.left = Math.random() * 100 + "vw";
+        conf.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 60%)`;
+        document.body.appendChild(conf);
+        setTimeout(() => conf.remove(), 6000);
+    }
+}
+
+// ===== TAK =====
+document.getElementById("yes").addEventListener("click", () => {
+    launchConfetti();
+    setTimeout(() => {
+        window.location.href = "tak.html";
+    }, 1500);
+});
+
+// ===== SERDUSZKA =====
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 30 + 15 + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 10000);
+}, 400);
+
+// ===== BUZIAKI =====
+document.addEventListener("click", (e) => {
+    const kiss = document.createElement("div");
+    kiss.className = "kiss";
+    kiss.innerHTML = "💋";
+    kiss.style.left = e.clientX + "px";
+    kiss.style.top = e.clientY + "px";
+    document.body.appendChild(kiss);
+    setTimeout(() => kiss.remove(), 4000);
+});
+</script>
+
+</body>
+</html>
